@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { IconInput, InputContainer } from '../App.styles'
 
-type Props = {
-    toTake: string,
+export type Props = {
+    label: string,
     condition:string,
-    inputId:string
+    inputId:string,
+    placeholder:string,
+    name:string,
+    type:string,
+    regExp:RegExp,
 }
 
-const Input = (data:Props) => {
-  const {toTake,condition,inputId}:Props = data
+const Input = ({data}) => {
+    
+    const {label,type,condition,inputId,placeholder,name,regExp}:Props = data
+
+    const [validated, setValidated] = useState<boolean>(false)
+
+
   return (
-    <div>
-    <label htmlFor={`${inputId}-input`}>{toTake}: </label>
+    <div key={inputId}>
+    <label htmlFor={`${inputId}-input`}>{label}: </label>
     <InputContainer>
-    <input type="text" name={toTake} placeholder={toTake} id={`${inputId}-input`}/>
+    <input type={type} name={name} placeholder={placeholder} id={`${inputId}-input`}/>
     <IconInput icon={faCircleXmark} />
     </InputContainer>
     <small>{condition}</small>
