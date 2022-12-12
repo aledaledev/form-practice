@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { GlobalStyle, Wrapper, FormSc, InputContainer, IconInput, IconDanger, IconSuccess } from './App.styles'
+import { Wrapper, FormSc, InputContainer, IconInput, IconDanger, IconSuccess } from '../styles/FormVanilla.styles'
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import Input, { Props } from './components/Input'
+import Input, { Props } from '../components/Input'
 
 const inputData:Props[] = [
   {
@@ -63,11 +63,10 @@ const inputData:Props[] = [
 
 //{toTake,condition,inputId}
 //toTake={toTake} condition={condition} inputId={inputId}
-function App() {
+function FormVanilla() {
 
   return (
     <>
-    <GlobalStyle/>
     <Wrapper>
       <FormSc id='form'>
 
@@ -90,4 +89,4 @@ function App() {
   )
 }
 
-export default App
+export default FormVanilla

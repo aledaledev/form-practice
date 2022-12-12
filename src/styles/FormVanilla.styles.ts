@@ -1,4 +1,4 @@
-import styled ,{createGlobalStyle} from 'styled-components'
+import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const colors = {
@@ -129,23 +129,5 @@ export const InputContainer = styled.div`
             outline: none;
             box-shadow: 3px 8px 30px rgba(163, 163,163, 0.4);
         }
-    }
-`
-
-export const GlobalStyle = createGlobalStyle`
-    *{
-        box-sizing: border-box;
-    }
-    
-    body{
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      height: auto;
-      background-color: #001020;
-    }
-
-    #root{
-        height: 100%;
     }
 `

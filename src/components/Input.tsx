@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { IconInput, InputContainer } from '../App.styles'
+import { IconInput, InputContainer } from '../styles/FormVanilla.styles'
 
 export type Props = {
     label: string,
@@ -17,7 +17,6 @@ const Input = ({data}) => {
     const {label,type,condition,inputId,placeholder,name,regExp}:Props = data
 
     const [validated, setValidated] = useState<boolean>(false)
-
 
   return (
     <div key={inputId}>
