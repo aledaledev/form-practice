@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const colors = {
@@ -20,8 +20,18 @@ export const IconInput = styled(FontAwesomeIcon)`
     z-index: 1000;
     right: .8rem;
     top: 1.05rem;
-    color: ${colors.error};
-    //opacity: 0;
+    opacity: 0;
+
+    ${props => props.valid==='true' && css`
+        opacity: 1;
+        color: ${colors.success};
+    `}
+
+    ${props => props.valid==='false' && css`
+        opacity: 1;
+        color: ${colors.error};
+    `}
+
 `
 
 export const Wrapper = styled.main`
@@ -68,8 +78,6 @@ export const FormSc = styled.form`
         }
 
         small{
-            display: block;
-            //display: none;
             color: ${colors.error};
             margin-top: .5rem;
             margin-left: .5rem;
@@ -115,9 +123,14 @@ export const FormSc = styled.form`
     }
 `
 
-export const InputContainer = styled.div`
-    position: relative;
-    input{
+export const Label = styled.label`
+    ${props => props.valid==='false' && css`
+        color: ${colors.error};
+    `}
+`
+
+export const InputSc = styled.input`
+
         height: 3.1rem;
         width: 100%;
         padding: 0 1rem;
@@ -130,7 +143,13 @@ export const InputContainer = styled.div`
             box-shadow: 3px 8px 30px rgba(163, 163,163, 0.4);
         }
 
-    }
+        ${props => props.valid==='true' && css`
+            border: 2px solid ${colors.success};
+        `}
+
+        ${props => props.valid==='false' && css`
+            border: 2px solid ${colors.error} !important;
+        `}
 `
 
 export const ButtonView = styled.button`

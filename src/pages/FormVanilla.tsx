@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Wrapper, FormSc, InputContainer, IconInput, IconDanger, IconSuccess } from '../assets/styles/FormVanilla.styles'
+import React, { useState } from 'react'
+import { Wrapper, FormSc, IconDanger, IconSuccess } from '../assets/styles/FormVanilla.styles'
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import Input from '../components/Input'
 import { InputState, Props } from '../types'
@@ -7,7 +7,7 @@ import { InputState, Props } from '../types'
 const inputData:Props[] = [
   {
     label:'user',
-    condition: 'Must min 8 digits, letters, numbers, one uppercase',
+    condition: 'Must min 8 digits, letters, numbers, one uppercase, no special chars, no spaces',
     placeholder:'Alee4567',
     name:'user',
     type:'text',
@@ -65,11 +65,20 @@ function FormVanilla() {
   const [rewritePassword, setRewritePassword] = useState<InputState>({field:'',valid:null})
   const [email, setEmail] = useState<InputState>({field:'',valid:null})
   const [phone, setPhone] = useState<InputState>({field:'',valid:null})
+  const [terms, setTerms] = useState<boolean>(false)
+
+  const checkPassword = () => {
+    return rewritePassword.field===password.field
+  }
+
+  const handleSubmit = (e:React.FormEvent) => {
+    e.preventDefault()
+  }
 
   return (
     <>
     <Wrapper>
-      <FormSc id='form'>
+      <FormSc onSubmit={handleSubmit}>
 
         <Input data={inputData[0]}
             state={user}
@@ -89,6 +98,7 @@ function FormVanilla() {
         <Input data={inputData[3]}
             state={rewritePassword}
             setState={setRewritePassword}
+            checkPassword={checkPassword}
         />
 
         <Input data={inputData[4]}
@@ -102,7 +112,7 @@ function FormVanilla() {
         />
 
         <label className='terms' htmlFor="check-terms">
-          <input type="checkbox" name='terms' id='check-terms'/>
+          <input type="checkbox" checked={terms} onChange={() => setTerms(!terms)} name='terms' id='check-terms'/>
           I accept terms and conditions
         </label>
         <div className='advice'>

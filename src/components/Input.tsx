@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { IconInput, InputContainer } from '../assets/styles/FormVanilla.styles'
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { IconInput, InputSc, Label } from '../assets/styles/FormVanilla.styles'
 import { InputProps, Props } from '../types'
 
-
-const Input = ({data,state,setState}:InputProps) => {
+const Input = ({data,state,setState,checkPassword}:InputProps) => {
     
   const {label,type,condition,placeholder,name,regExp}:Props = data
 
@@ -23,19 +22,25 @@ const Input = ({data,state,setState}:InputProps) => {
       const validation = regExp.test(state.field)
       setState({
         ...state,
-        valid:validation,
+        valid:validation?'true':'false',
+      })
+    }
+    if(checkPassword){
+      setState({
+        ...state,
+        valid:checkPassword()?'true':'false',
       })
     }
   }
 
   return (
     <div>
-    <label htmlFor={`${name}-input`}>{label}: </label>
-    <InputContainer>
-    <input type={type} value={state.field} onChange={handleInputChange} onKeyUp={handleValidation} onBlur={handleValidation} name={name} placeholder={placeholder} id={`${name}-input`}/>
-    {state.valid?null:<IconInput icon={faCircleXmark}/>}
-    </InputContainer>
-    {state.valid?null:<small>{condition}</small>}
+    <Label htmlFor={`${name}-input`} valid={state.valid}>{label}: </Label>
+    <div style={{position:'relative'}}>
+    <InputSc type={type} valid={state.valid} value={state.field} onChange={handleInputChange} onKeyUp={handleValidation} onBlur={handleValidation} name={name} placeholder={placeholder} id={`${name}-input`}/>
+    <IconInput valid={state.valid} icon={state.valid==='false'?faCircleXmark:faCircleCheck}/>
+    </div>
+    {state.valid==='false'?<small>{condition}</small>:null}
   </div>
   )
 }

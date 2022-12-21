@@ -9,11 +9,12 @@ export type Props = {
 
 export interface InputState {
   field:string
-  valid:boolean | null
+  valid:string | null
 }
 
 export interface InputProps {
   data: Props;
   state: InputState;
   setState: (value: InputState) => void;
+  checkPassword?:()=> boolean
 }
