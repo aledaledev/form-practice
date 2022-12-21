@@ -95,7 +95,7 @@ export const FormSc = styled.form`
         }
     }
 
-    button{
+    >button{
         color: #fff;
         border: 0;
         background-color: #000;
@@ -129,5 +129,21 @@ export const InputContainer = styled.div`
             outline: none;
             box-shadow: 3px 8px 30px rgba(163, 163,163, 0.4);
         }
+
+    }
+`
+
+export const ButtonView = styled.button`
+    border: none;
+    padding: .5rem;
+    background-color: #bbb;
+    transition: opacity .5s;
+    
+    position: absolute;
+    right: 2.5rem;
+    top: 2.25rem;
+
+    &:hover{
+        opacity: .7;
     }
 `

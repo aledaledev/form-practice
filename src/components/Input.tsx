@@ -1,31 +1,41 @@
 import React, { useState } from 'react'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { IconInput, InputContainer } from '../styles/FormVanilla.styles'
+import { IconInput, InputContainer } from '../assets/styles/FormVanilla.styles'
+import { InputProps, Props } from '../types'
 
-export type Props = {
-    label: string,
-    condition:string,
-    inputId:string,
-    placeholder:string,
-    name:string,
-    type:string,
-    regExp:RegExp,
-}
 
-const Input = ({data}) => {
+const Input = ({data,state,setState}:InputProps) => {
     
-    const {label,type,condition,inputId,placeholder,name,regExp}:Props = data
+  const {label,type,condition,placeholder,name,regExp}:Props = data
 
-    const [validated, setValidated] = useState<boolean>(false)
+  //const [validated, setValidated] = useState<boolean>(false)
+  //<ButtonView onClick={viewPassword}>{view?<FontAwesomeIcon color='#f1f1f1' icon={faEyeSlash}/>:<FontAwesomeIcon color='#f1f1f1' icon={faEye}/>}</ButtonView>
+
+  const handleInputChange = (e:React.FormEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      field:e.currentTarget.value
+    })
+  }
+
+  const handleValidation = () => {
+    if(regExp){
+      const validation = regExp.test(state.field)
+      setState({
+        ...state,
+        valid:validation,
+      })
+    }
+  }
 
   return (
-    <div key={inputId}>
-    <label htmlFor={`${inputId}-input`}>{label}: </label>
+    <div>
+    <label htmlFor={`${name}-input`}>{label}: </label>
     <InputContainer>
-    <input type={type} name={name} placeholder={placeholder} id={`${inputId}-input`}/>
-    <IconInput icon={faCircleXmark} />
+    <input type={type} value={state.field} onChange={handleInputChange} onKeyUp={handleValidation} onBlur={handleValidation} name={name} placeholder={placeholder} id={`${name}-input`}/>
+    {state.valid?null:<IconInput icon={faCircleXmark}/>}
     </InputContainer>
-    <small>{condition}</small>
+    {state.valid?null:<small>{condition}</small>}
   </div>
   )
 }

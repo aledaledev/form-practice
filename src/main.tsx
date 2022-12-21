@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import { GlobalStyle } from './styles/GlobalStyles'
+import { GlobalStyle } from './assets/styles/GlobalStyles'
 import FormHook from './pages/FormHook'
 import Formik from './pages/Formik'
 import FormVanilla from './pages/FormVanilla'

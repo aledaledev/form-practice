@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { Wrapper, FormSc, InputContainer, IconInput, IconDanger, IconSuccess } from '../styles/FormVanilla.styles'
+import { Wrapper, FormSc, InputContainer, IconInput, IconDanger, IconSuccess } from '../assets/styles/FormVanilla.styles'
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import Input, { Props } from '../components/Input'
+import Input from '../components/Input'
+import { InputState, Props } from '../types'
 
 const inputData:Props[] = [
   {
     label:'user',
-    condition: 'must 4 to 16 digits, letters, numbers, one Uppercase',
-    inputId:'user',
+    condition: 'Must min 8 digits, letters, numbers, one uppercase',
     placeholder:'Alee4567',
     name:'user',
     type:'text',
@@ -16,48 +16,42 @@ const inputData:Props[] = [
   },
   {
     label:'fullname',
-    condition: 'Lorem ipsum dolor sit.',
-    inputId:'name',
+    condition: 'Complete this field',
     placeholder:'Alejandro Salas',
     name:'name',
     type:'text',
-    regExp:/1/,
+    regExp:/^([a-zA-ZñÑ]{2,}\s[a-zA-ZñÑ]{1,}'?-?[a-zA-ZñÑ]{2,}\s?([a-zA-ZñÑ]{1,})?)/
   },
   {
     label:'password',
-    condition: 'Lorem ipsum dolor sit.',
-    inputId:'password',
+    condition: 'Must min 8 digits, letters, numbers, one uppercase and one special character',
     placeholder:'',
     name:'password',
     type:'password',
-    regExp:/1/,
+    regExp:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
   },
   {
     label:'Rewrite password',
-    condition: 'Lorem ipsum dolor sit.',
-    inputId:'password-re',
+    condition: 'Check your password',
     placeholder:'',
     name:'password-re',
-    type:'passwoor',
-    regExp:/1/,
+    type:'password'
   },
   {
     label:'email',
-    condition: 'Lorem ipsum dolor sit.',
-    inputId:'email',
+    condition: 'Complete this field',
     placeholder:'email@email.com',
     name:'email',
     type:'email',
-    regExp:/1/,
+    regExp:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
   },
   {
     label:'phone',
-    condition: 'Lorem ipsum dolor sit.',
-    inputId:'phone',
-    placeholder:'XXX XXXX-XXXX',
+    condition: 'Complete this field',
+    placeholder:'XXXXXXXXXX',
     name:'phone',
     type:'number',
-    regExp:/1/,
+    regExp:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
   }
 ]
 
@@ -65,12 +59,47 @@ const inputData:Props[] = [
 //toTake={toTake} condition={condition} inputId={inputId}
 function FormVanilla() {
 
+  const [user, setUser] = useState<InputState>({field:'',valid:null})
+  const [fullname, setFullName] = useState<InputState>({field:'',valid:null})
+  const [password, setPassword] = useState<InputState>({field:'',valid:null})
+  const [rewritePassword, setRewritePassword] = useState<InputState>({field:'',valid:null})
+  const [email, setEmail] = useState<InputState>({field:'',valid:null})
+  const [phone, setPhone] = useState<InputState>({field:'',valid:null})
+
   return (
     <>
     <Wrapper>
       <FormSc id='form'>
 
-        {inputData.map((data:Props) => <Input key={data.inputId} data={data}/>)}
+        <Input data={inputData[0]}
+            state={user}
+            setState={setUser}
+        />
+
+        <Input data={inputData[1]}
+            state={fullname}
+            setState={setFullName}
+        />
+
+        <Input data={inputData[2]}
+            state={password}
+            setState={setPassword}
+        />
+        
+        <Input data={inputData[3]}
+            state={rewritePassword}
+            setState={setRewritePassword}
+        />
+
+        <Input data={inputData[4]}
+            state={email}
+            setState={setEmail}
+        />
+
+        <Input data={inputData[5]}
+            state={phone}
+            setState={setPhone}
+        />
 
         <label className='terms' htmlFor="check-terms">
           <input type="checkbox" name='terms' id='check-terms'/>
