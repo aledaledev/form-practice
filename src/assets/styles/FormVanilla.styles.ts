@@ -42,6 +42,27 @@ export const Wrapper = styled.main`
     margin: 5rem 0;
 `
 
+export const ToastSc = styled.div`
+        padding: 1rem;
+
+        p{
+            color: #f0f0f0;
+            margin: 0 .2rem;
+        }
+
+        ${props => props.message==='error' && css`
+            background-color: ${colors.error};
+        `}
+
+        ${props => props.message==='success' && css`
+            background-color: ${colors.success};
+        `}
+
+    @media screen and (min-width: 720px){
+        grid-column: span 2;
+    }
+`
+
 export const FormSc = styled.form`
     background-color: #f0f0f0;
     padding: 1rem;
@@ -52,11 +73,6 @@ export const FormSc = styled.form`
     gap: 1rem;
     @media screen and (min-width: 720px){
         grid-template-columns: 1fr 1fr;
-        
-        .advice{
-            grid-column: span 2;
-
-        }
 
         .terms{
             grid-column: span 2;
@@ -93,15 +109,6 @@ export const FormSc = styled.form`
         }
     }
 
-    .advice{
-        background-color: ${colors.success};
-        padding: 1rem;
-
-        p{
-            color: #f0f0f0;
-            margin: 0 .2rem;
-        }
-    }
 
     >button{
         color: #fff;
@@ -130,12 +137,12 @@ export const Label = styled.label`
 `
 
 export const InputSc = styled.input`
-
         height: 3.1rem;
         width: 100%;
         padding: 0 1rem;
         transition: all .3s ease;
         border: 2px solid transparent;
+        -moz-appearance:textfield;
 
         &:focus{
             border: 2px solid ${colors.border};

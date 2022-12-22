@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Wrapper, FormSc, IconDanger, IconSuccess } from '../assets/styles/FormVanilla.styles'
+import { Wrapper, FormSc, IconDanger, IconSuccess, ToastSc } from '../assets/styles/FormVanilla.styles'
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import Input from '../components/Input'
 import { InputState, Props } from '../types'
@@ -66,6 +66,7 @@ function FormVanilla() {
   const [email, setEmail] = useState<InputState>({field:'',valid:null})
   const [phone, setPhone] = useState<InputState>({field:'',valid:null})
   const [terms, setTerms] = useState<boolean>(false)
+  const [messageInfo, setMessageInfo] = useState<'success' | 'error' | null>(null)
 
   const checkPassword = () => {
     return rewritePassword.field===password.field
@@ -73,6 +74,21 @@ function FormVanilla() {
 
   const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault()
+    if(user.valid==='true' && fullname.valid==='true' && password.valid==='true' && rewritePassword.valid==='true' && email.valid==='true' && phone.valid==='true' && terms){
+      setMessageInfo('success')
+      setUser({field:'',valid:null})
+      setFullName({field:'',valid:null})
+      setPassword({field:'',valid:null})
+      setRewritePassword({field:'',valid:null})
+      setEmail({field:'',valid:null})
+      setPhone({field:'',valid:null})
+    } else {
+      setMessageInfo('error')
+    }
+
+    setTimeout(()=>{
+      setMessageInfo(null)
+    },4000)
   }
 
   return (
@@ -115,10 +131,12 @@ function FormVanilla() {
           <input type="checkbox" checked={terms} onChange={() => setTerms(!terms)} name='terms' id='check-terms'/>
           I accept terms and conditions
         </label>
-        <div className='advice'>
-          <p><IconSuccess icon={faCircleCheck}/><b>Success! </b>Message send correctly</p>
-          {false?<p><IconDanger icon={faCircleExclamation}/><b>Error: </b> Sorry, we need you complete all fields</p>:null}
-        </div>
+
+        {messageInfo!==null?
+        <ToastSc message={messageInfo}>
+          {messageInfo==='success'?<p><IconSuccess icon={faCircleCheck}/><b>Success! </b>Message send correctly</p>:null}
+          {messageInfo==='error'?<p><IconDanger icon={faCircleExclamation}/><b>Error: </b> Sorry, we need you complete all fields</p>:null}
+        </ToastSc>:null}
         <button type='submit'>
           send
         </button>
