@@ -38,7 +38,7 @@ const Landing = () => {
         <h2>Forms</h2>
         <ul>
             <li><Link to='/form'>clasic form</Link></li>
-            <li><Link to='/react-hook-form'>react form hook</Link></li>
+            <li><Link to='/react-hook-form'>react hook form</Link></li>
             <li><Link to='/formik'>formik</Link></li>
         </ul>
         </div>

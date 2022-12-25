@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Wrapper, FormSc, IconDanger, IconSuccess, ToastSc } from '../assets/styles/FormVanilla.styles'
+import { Wrapper, FormSc, IconDanger, IconSuccess, ToastSc } from '../assets/styles/VanillaForm.styles'
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import Input from '../components/Input'
 import { InputState, Props } from '../types'

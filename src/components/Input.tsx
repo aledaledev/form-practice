@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { IconInput, InputSc, Label } from '../assets/styles/FormVanilla.styles'
+import { IconInput, InputSc, Label } from '../assets/styles/VanillaForm.styles'
 import { InputProps, Props } from '../types'
 
 const Input = ({data,state,setState,checkPassword}:InputProps) => {
