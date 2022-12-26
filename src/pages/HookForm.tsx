@@ -53,7 +53,7 @@ const HookForm = () => {
         <div>
           <input {...register('email', {required:true, pattern:/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/})} type="email" placeholder='Email'/>
           {errors.email?.type==='required'?<p>this field cannot be void</p>:null}
-          {errors.email?.type==='pattern'?<p>sorry type a correct email</p>:null}
+          {errors.email?.type==='pattern'?<p>sorry, type a correct email</p>:null}
         </div>
         <div>
           <input {...register('age', {required:true, validate:ageValidator})} type='number' placeholder='Age'/>
