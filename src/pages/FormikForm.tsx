@@ -18,6 +18,8 @@ const FormikForm = () => {
       setSuccess(true)
   }
 
+  //faltan valores igual para select, radio y textarea
+  
   return (
     <Wrapper>
       <div>
@@ -26,8 +28,11 @@ const FormikForm = () => {
           initialValues={{
             user: "",
             email: "",
+            country:'arg',
+            message: "",
+            genre: 'man',
             checkPhone:false,
-            phoneNumber: null,
+            phoneNumber: '',
           }}
           onSubmit={(values,{resetForm}) => {
             resetForm()
@@ -90,7 +95,8 @@ const FormikForm = () => {
                 </label>
               </div>
               <div>
-                <Field name='message' as='textarea' placeholder='message...' /> 
+              <label htmlFor="checkPhone">Message: </label>
+                <Field name='message' as='textarea' placeholder='write something...' /> 
               </div>
               <div>
                 <label htmlFor="checkPhone">Phone?</label>
